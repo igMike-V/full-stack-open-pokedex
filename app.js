@@ -7,7 +7,10 @@ const app = express()
 const PORT = process.env.PORT || 5000
 
 app.get('/version', (_req, res) => {
-  res.send('1.0.0')
+  res.send('1.0.1')
+})
+app.get('/health', (req, res) => {
+  res.send('ok')
 })
 
 app.use(express.static('dist'))
