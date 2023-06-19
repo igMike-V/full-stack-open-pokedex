@@ -31,8 +31,8 @@ jobs:
           start: npm run start-prod
           wait-on: "http://localhost:5000"
       - name: Deploy to render
+        if: ${{ github.event_name}}
         uses: johnbeynon/render-deploy-action@v0.0.8
-        if: ${{ github.event_name == 'push'}}}
         with: 
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
