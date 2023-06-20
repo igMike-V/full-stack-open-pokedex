@@ -10,9 +10,12 @@ app.get('/version', (_req, res) => {
   res.send(VERSION)
 })
 
-app.get('/health', (req, res) => {
+app.get('/health', (_req, res) => {
+  res.send('ok')
+})
+
+app.get('broken', (_req, res) => {
   res.sendStatus(400)
-  //res.send('ok')
 })
 
 app.use(express.static('dist'))
