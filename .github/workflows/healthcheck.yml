@@ -1,9 +1,8 @@
 name: Health Check
 
 on: 
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: '5 * * * *'
 
 jobs:
   health_check:
@@ -13,11 +12,19 @@ jobs:
       uses: jtalk/url-health-check-action@v3
       with:
         url: 'https://fso-pokedex-7zia.onrender.com/health'
-    - name: Test Failure
+    - name: Health Check Failure
       uses: rjstone/discord-webhook-notify@v1.0.4
       if: failure()
       with:
         severity: error
         username: Pokedex Health Check
         text: OH NO! there is somthing wrong with the pokedex!
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
+    - name: Health Check OK
+      uses: rjstone/discord-webhook-notify@v1.0.4
+      if: success()
+      with:
+        severity: info
+        username: Pokedex Health Check
+        text: Pokedex is online.
         webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
