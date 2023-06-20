@@ -11,7 +11,8 @@ app.get('/version', (_req, res) => {
 })
 
 app.get('/health', (req, res) => {
-  res.send('ok')
+  res.sendStatus(400)
+  //res.send('ok')
 })
 
 app.use(express.static('dist'))
