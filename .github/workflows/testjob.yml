@@ -20,7 +20,9 @@ jobs:
         run: echo "$COMMITS"
       - name: commit messages
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+          COMMIT_MESSAGES: ${{ github.event.commits.*.message }}
         run: echo "$COMMIT_MESSAGES"
-      - name: commit message other
-        run: echo "${{ github.event.commits.message }}"
+      - name: test messages
+        env:
+          TEST_MESSAGES: ${{ steps.commit_messages.outputs.COMMIT_MESSAGES }}
+        run: echo "$TEST_MESSAGES"
