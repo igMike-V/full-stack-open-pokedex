@@ -26,3 +26,6 @@ jobs:
         env:
           TEST_MESSAGES: ${{ join(github.event.commits.*.message, '\n') }}
         run: echo "$TEST_MESSAGES"
+      - name: should not run
+        if: contains(join(github.event.commits.*.message, ' '), '#skip')
+        run: echo "should not run"
