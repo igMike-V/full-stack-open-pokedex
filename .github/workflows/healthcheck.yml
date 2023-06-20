@@ -12,4 +12,12 @@ jobs:
     - name: Check if the sevice URL is up
       uses: jtalk/url-health-check-action@v3
       with:
-        url: 'https://fso-pokedex-7zia.onrender.com/broken'
+        url: 'https://fso-pokedex-7zia.onrender.com/health'
+    - name: Test Failure
+      uses: rjstone/discord-webhook-notify@v1.0.4
+      if: failure()
+      with:
+        severity: error
+        username: Pokedex Health Check
+        text: OH NO! there is somthing wrong with the pokedex!
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
